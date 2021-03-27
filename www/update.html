@@ -22,7 +22,7 @@
                 var dataString = "id=" + id + "&title=" + title + "&duration=" + duration + "&price=" + price + "&update=";
                 $.ajax({
                     type: "POST",
-                    url: "https://subglobular-welders.000webhostapp.com/insert.php",
+                    url: "https://subglobular-welders.000webhostapp.com/update.php",
                     data: dataString,
                     crossDomain: true,
                     cache: false,
@@ -45,7 +45,7 @@
                 var dataString = "id=" + id + "&delete=";
                 $.ajax({
                     type: "GET",
-                    url: "https://subglobular-welders.000webhostapp.com/insert.php",
+                    url: "https://subglobular-welders.000webhostapp.com/delete.php",
                     data: dataString,
                     crossDomain: true,
                     cache: false,
