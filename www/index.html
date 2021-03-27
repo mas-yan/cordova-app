@@ -1,0 +1,49 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var url = "https://subglobular-welders.000webhostapp.com/json.php";
+            $.getJSON(url, function(result) {
+                console.log(result);
+                $.each(result, function(i, field) {
+                    var id = field.id;
+                    var title = field.title;
+                    var duration = field.duration;
+                    var price = field.price;
+                    $("#isi").append("<tr><td><p>" + title + "</p></td>" + "<td><p>" + duration + "</p></td>" + "<td><p>" + price + "</p></td><td><a class='btn btn-warning' href='update.html?id=" + id + "&title=" + title + "&duration=" + duration + "&price=" + price + "'><span class='item-note'>Update</a></td><tr>");
+                    // $("#duration").append("<td>" + duration + "</td>");
+                    // // $("#price").append("<td>" + price + "</td>");
+                    // $("#update").append("<a class='btn btn-warning' href='update.html?id=" + id + "&title=" + title + "&duration=" + duration + "&price=" + price + "'><span class='item-note'>Update</a><br><br>")
+                });
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <nav class="navbar bg-primary">
+        <a href="insert.html" class="btn btn-light">Insert</a>
+        <h3 class="text-wrap text-white">Read Database (JSON)</h3>
+        <a href="#"></a>
+    </nav>
+    <div class="container mt-5">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>title</th>
+                    <th>Duration</th>
+                    <th>Price</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="isi">
+            </tbody>
+        </table>
+    </div>
+    <script src="js/bootstrap.min.js"></script>
+</body>
+
+</html>

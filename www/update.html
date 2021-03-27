@@ -1,0 +1,101 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/geturi.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var id = decodeURI(getUrlVars()["id"]);
+            var title = decodeURI(getUrlVars()["title"]);
+            var duration = decodeURI(getUrlVars()["duration"]);
+            var price = decodeURI(getUrlVars()["price"]);
+            $("#id").val(id);
+            $("#title").val(title);
+            $("#duration").val(duration);
+            $("#price").val(price);
+            $("#update").click(function() {
+                var id = $("#id").val();
+                var title = $("#title").val();
+                var duration = $("#duration").val();
+                var price = $("#price").val();
+                var dataString = "id=" + id + "&title=" + title + "&duration=" + duration + "&price=" + price + "&update=";
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost/iki/web/cordova/app/update.php",
+                    data: dataString,
+                    crossDomain: true,
+                    cache: false,
+                    beforeSend: function() {
+                        $("#update").val('Connecting...');
+                    },
+                    success: function(data) {
+                        if (data == "success") {
+                            alert("Updated");
+                            $("#update").val("Update");
+                        } else if (data == "error") {
+                            alert("error");
+                        }
+                    }
+                });
+
+            });
+            $("#delete").click(function() {
+                var id = $("#id").val();
+                var dataString = "id=" + id + "&delete=";
+                $.ajax({
+                    type: "GET",
+                    url: "http://localhost/iki/web/cordova/app/delete.php",
+                    data: dataString,
+                    crossDomain: true,
+                    cache: false,
+                    beforeSend: function() {
+                        $("#delete").val('Connecting...');
+                    },
+                    success: function(data) {
+                        if (data == "success") {
+                            alert("Deleted");
+                            $("#delete").val("Delete");
+                        } else if (data == "error") {
+                            alert("error");
+                        }
+                    }
+                });
+
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <nav class="navbar bg-primary">
+        <a href="insert.html" class="btn btn-light">Insert</a>
+        <h3 class="text-wrap text-white">Insert Database</h3>
+        <a href="index.html" class="btn btn-light">Home</a>
+    </nav>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <input type="hidden" id="id" value="" />
+                <div class="form-group">
+                    <label for="title">Titile</label>
+                    <input class="form-control" type="text" id="title" value="" />
+                </div>
+                <div class="form-group">
+                    <label for="duration">Duration</label>
+                    <input class="form-control" type="text" id="duration" value="" />
+                </div>
+                <div class="form-group">
+                    <label for="price">Price</label>
+                    <input class="form-control" type="text" id="price" value="" />
+                </div>
+                <input type="button" id="update" class="btn btn-primary btn-block" value="update" />
+                <input type="button" id="delete" class="btn btn-danger btn-block" value="delete" />
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="js/bootstrap.min.js"></script>
+</body>
+
+</html>
